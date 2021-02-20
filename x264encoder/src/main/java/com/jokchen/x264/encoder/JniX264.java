@@ -6,9 +6,9 @@ package com.jokchen.x264.encoder;
  * @since 2021/1/4 11:16
  */
 public class JniX264 {
-    private listener mListener;
+    private EncodeListener mListener;
 
-    public JniX264(listener listener) {
+    public JniX264(EncodeListener listener) {
         mListener = listener;
     }
 
@@ -25,10 +25,6 @@ public class JniX264 {
     public native void CloseX264Encode();
 
     private void H264DataCallBackFunc(byte[] buffer, int length) {
-        mListener.h264Data(buffer, length);
-    }
-
-    public interface listener {
-        void h264Data(byte[] buffer, int length);
+        mListener.onEncode(buffer, length);
     }
 }
