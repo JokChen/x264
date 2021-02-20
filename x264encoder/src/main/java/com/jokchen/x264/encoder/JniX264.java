@@ -1,4 +1,4 @@
-package com.cvte.excshare.x264;
+package com.jokchen.x264.encoder;
 
 import java.nio.ByteBuffer;
 

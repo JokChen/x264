@@ -74,7 +74,7 @@ void CALLBACK H264DataCallBackFunc(void *pdata, int datalen) {
 
 
 static void
-Java_com_cvte_excshare_x264_JniX264_initX264Encode(JNIEnv *env, jobject thiz) {
+Java_com_jokchen_x264_encoder_JniX264_initX264Encode(JNIEnv *env, jobject thiz) {
     env->GetJavaVM(&VM);
     if (VM != NULL && VM->AttachCurrentThread(&env, NULL) == JNI_OK) {
         ehobj = env->NewGlobalRef(thiz);
@@ -87,13 +87,13 @@ Java_com_cvte_excshare_x264_JniX264_initX264Encode(JNIEnv *env, jobject thiz) {
 }
 
 static void
-Java_com_cvte_excshare_x264_JniX264_setParameter(JNIEnv *env, jobject thiz, jint width, jint height,
+Java_com_jokchen_x264_encoder_JniX264_setParameter(JNIEnv *env, jobject thiz, jint width, jint height,
                                                  jint fps, jint bite) {
     setParameter(width, height, fps, bite);
 }
 
 static void
-Java_com_cvte_excshare_x264_JniX264_encoderH264(JNIEnv *env, jobject thiz, jbyteArray srcData,
+Java_com_jokchen_x264_encoder_JniX264_encoderH264(JNIEnv *env, jobject thiz, jbyteArray srcData,
                                                 jint length,
                                                 jlong time) {
 //    jobject input = (jobject) env->GetObjectField(thiz, fid_yuvbuffer);
@@ -104,7 +104,7 @@ Java_com_cvte_excshare_x264_JniX264_encoderH264(JNIEnv *env, jobject thiz, jbyte
 }
 
 static void
-Java_com_cvte_excshare_x264_JniX264_CloseX264Encode(JNIEnv *env, jobject thiz) {
+Java_com_jokchen_x264_encoder_JniX264_CloseX264Encode(JNIEnv *env, jobject thiz) {
     releaseX264Encode();
 }
 
@@ -112,10 +112,10 @@ Java_com_cvte_excshare_x264_JniX264_CloseX264Encode(JNIEnv *env, jobject thiz) {
 //************************************************************JNI_LOAL****************************************************************/
 //************************************************************************************************************************************/
 
-static JNINativeMethod gMethods[] = {{"initX264Encode",  "()V",     (void *) Java_com_cvte_excshare_x264_JniX264_initX264Encode},
-                                     {"setParameter",    "(IIII)V", (void *) Java_com_cvte_excshare_x264_JniX264_setParameter},
-                                     {"encoderH264",     "([BIJ)V", (void *) Java_com_cvte_excshare_x264_JniX264_encoderH264},
-                                     {"CloseX264Encode", "()V",     (void *) Java_com_cvte_excshare_x264_JniX264_CloseX264Encode}};
+static JNINativeMethod gMethods[] = {{"initX264Encode",  "()V",     (void *) Java_com_jokchen_x264_encoder_JniX264_initX264Encode},
+                                     {"setParameter",    "(IIII)V", (void *) Java_com_jokchen_x264_encoder_JniX264_setParameter},
+                                     {"encoderH264",     "([BIJ)V", (void *) Java_com_jokchen_x264_encoder_JniX264_encoderH264},
+                                     {"CloseX264Encode", "()V",     (void *) Java_com_jokchen_x264_encoder_JniX264_CloseX264Encode}};
 
 
 int register_Native_Methods(JNIEnv *env) {

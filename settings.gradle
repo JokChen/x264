@@ -1,2 +1,2 @@
-include ':app' , ':x264'
+include ':app' , ':x264encoder'
 rootProject.name = "x264"
