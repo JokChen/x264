@@ -1,4 +1,4 @@
-<manifest package="com.cvte.excshare.x264"
+<manifest package="com.jokchen.x264.encoder"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
