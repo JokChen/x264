@@ -1,7 +1,5 @@
 package com.jokchen.x264.encoder;
 
-import java.nio.ByteBuffer;
-
 /**
  * @author chenxiuning
  * @brief
@@ -17,8 +15,6 @@ public class JniX264 {
     static {
         System.loadLibrary("x264-lib");
     }
-
-    private ByteBuffer mVideobuffer;
 
     public native void initX264Encode();
 

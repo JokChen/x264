@@ -7,7 +7,6 @@
 #ifndef NELEM
 # define NELEM(x) ((int) (sizeof(x) / sizeof((x)[0])))
 #endif
-#define YUVBUFFER_IN_JAVA_OBJ_NAME   "mVideobuffer"
 
 static JavaVM *VM;
 jfieldID fid_yuvbuffer;
@@ -42,9 +41,7 @@ struct JavaMethodID {
 
     jmethodID getMID(JNIEnv *env, jclass clazz) {
         if (id == NULL) {
-            //LOGI("getMID,name=%s,sig=%s,class=%p",name,signature,clazz);
             id = env->GetMethodID(clazz, name, signature);
-            //LOGI("getMID,id=%d",id);
         }
         return id;
     }
@@ -79,8 +76,6 @@ Java_com_jokchen_x264_encoder_JniX264_initX264Encode(JNIEnv *env, jobject thiz) 
     if (VM != NULL && VM->AttachCurrentThread(&env, NULL) == JNI_OK) {
         ehobj = env->NewGlobalRef(thiz);
         jclz = (jclass) env->NewGlobalRef(env->GetObjectClass(thiz));
-//        fid_yuvbuffer = env->GetFieldID(jclz, YUVBUFFER_IN_JAVA_OBJ_NAME,
-//                                        "Ljava/nio/ByteBuffer;");
     }
 
     initX264Encode(H264DataCallBackFunc);
@@ -96,8 +91,6 @@ static void
 Java_com_jokchen_x264_encoder_JniX264_encoderH264(JNIEnv *env, jobject thiz, jbyteArray srcData,
                                                 jint length,
                                                 jlong time) {
-//    jobject input = (jobject) env->GetObjectField(thiz, fid_yuvbuffer);
-//    unsigned char *jb = (unsigned char *) env->GetDirectBufferAddress(input);
     jbyte *bytes = env->GetByteArrayElements(srcData, NULL);
     encoderH264(bytes, length, time);
     env->ReleaseByteArrayElements(srcData, bytes, 0);
