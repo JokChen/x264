@@ -5,7 +5,7 @@
 
 ### 添加依赖
 ```groovy
-implementation 'com.github.JokChen:x264:1.0.0'
+implementation 'com.github.JokChen:x264:1.0.6'
 ```
 
 ### 添加混淆规则
