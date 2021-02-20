@@ -4,9 +4,7 @@
 # define NELEM(x) ((int) (sizeof(x) / sizeof((x)[0])))
 #endif
 
-#define YUVBUFFER_IN_JAVA_OBJ_NAME   "mVideobuffer"
-
-static const char *const kClassPathName = "com/cvte/excshare/x264/JniX264";
+static const char *const kClassPathName = "com/jokchen/x264/encoder/JniX264";
 
 extern "C"
 {

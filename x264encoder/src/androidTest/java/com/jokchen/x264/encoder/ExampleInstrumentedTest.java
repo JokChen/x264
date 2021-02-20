@@ -1,4 +1,4 @@
-package com.cvte.excshare.x264;
+package com.jokchen.x264.encoder;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.cvte.excshare.x264.test", appContext.getPackageName());
+        assertEquals("com.jokchen.x264.encoder.test", appContext.getPackageName());
     }
 }
