@@ -1,11 +1,13 @@
-﻿#include "include/Buffer.h"
-#include "include/PUX264Encoder.h"
-#include "include/Macro.h"
-#include "x264/x264.h"
+﻿#include "x264_encoder.h"
+
 #include <stdio.h>
 #include <sys/time.h>
+#include <memory.h>
 
-static int32_t getCurrentTime()      //直接调用这个函数就行了，返回值最好是int64_t，long long应该也可以
+#include "Macro.h"
+#include "x264.h"
+
+static int32_t GetCurrentTime()      //直接调用这个函数就行了，返回值最好是int64_t，long long应该也可以
 {
     struct timeval tv;
     gettimeofday(&tv, NULL);    //该函数在sys/time.h头文件中
@@ -13,7 +15,7 @@ static int32_t getCurrentTime()      //直接调用这个函数就行了，返�
 }
 
 
-x264Encode::x264Encode() {
+X264Encode::X264Encode() {
     _x264_encoder = NULL;
     _x264_param = new x264_param_t;
     int result = x264_param_default_preset(_x264_param, "ultrafast", "zerolatency");
@@ -22,7 +24,7 @@ x264Encode::x264Encode() {
     LOGD("****************result = %d", result);
 }
 
-void x264Encode::setParameter(int width, int height, int fps, int bite) {
+void X264Encode::SetParameter(int width, int height, int fps, int bite) {
     xfps = fps;
     xheight = height;
     xwidth = width;
@@ -113,7 +115,7 @@ void x264Encode::setParameter(int width, int height, int fps, int bite) {
     _in_pic->img.i_plane = 3;
 }
 
-void x264Encode::startEncoder(uint8_t *dataptr, char *&bufdata, int &buflen, int &isKeyFrame) {
+void X264Encode::StartEncoder(uint8_t *dataptr, char *&bufdata, int &buflen, int &isKeyFrame) {
 
     int width = xheight;
     int height = xwidth;
@@ -154,10 +156,10 @@ void x264Encode::startEncoder(uint8_t *dataptr, char *&bufdata, int &buflen, int
     int32_t ms2;
     int32_t ms3;
     if (_x264_encoder != NULL) {
-//        ms1 = getCurrentTime();
+//        ms1 = GetCurrentTime();
 //        LOGD("###################ms1 = %d", ms1);
         Result = x264_encoder_encode(_x264_encoder, &nal, &i_nal, _in_pic, _out_pic);
-//        ms2 = getCurrentTime();
+//        ms2 = GetCurrentTime();
 //        LOGD("###################ms2 = %d, interval = %d", ms2, ms2 - ms1);
         isKeyFrame = _out_pic->b_keyframe;
         _in_pic->i_pts++;
@@ -186,13 +188,13 @@ void x264Encode::startEncoder(uint8_t *dataptr, char *&bufdata, int &buflen, int
 
 //        LOGI("/**********************编码成功,长度为：%d************************", bufsize);
         buflen = bufsize;
-//        ms3 = getCurrentTime();
+//        ms3 = GetCurrentTime();
 //        LOGD("###################ms3 = %d, interval = %d", ms3, ms3 - ms2);
     }
 }
 
 
-void x264Encode::Flush() {
+void X264Encode::Flush() {
     x264_picture_t pic_out;
     x264_nal_t *nal;
     int i_nal;
@@ -200,7 +202,7 @@ void x264Encode::Flush() {
     }
 }
 
-void x264Encode::releaseEncoder() {
+void X264Encode::ReleaseEncoder() {
     this->Flush();
 
 //    x264_picture_clean(_in_pic);

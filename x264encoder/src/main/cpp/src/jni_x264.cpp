@@ -1,5 +1,5 @@
-#include "include/jni_x264.h"
-#include "include/x264_encoder.h"
+#include "jni_x264.h"
+#include "x264_manager.h"
 #include <string.h>
 #include <stdlib.h>
 #include <Macro.h>
@@ -78,27 +78,28 @@ Java_com_jokchen_x264_encoder_JniX264_initX264Encode(JNIEnv *env, jobject thiz) 
         jclz = (jclass) env->NewGlobalRef(env->GetObjectClass(thiz));
     }
 
-    initX264Encode(H264DataCallBackFunc);
+    InitX264Encode(H264DataCallBackFunc);
 }
 
 static void
-Java_com_jokchen_x264_encoder_JniX264_setParameter(JNIEnv *env, jobject thiz, jint width, jint height,
-                                                 jint fps, jint bite) {
-    setParameter(width, height, fps, bite);
+Java_com_jokchen_x264_encoder_JniX264_setParameter(JNIEnv *env, jobject thiz, jint width,
+                                                   jint height,
+                                                   jint fps, jint bite) {
+    SetParameter(width, height, fps, bite);
 }
 
 static void
 Java_com_jokchen_x264_encoder_JniX264_encoderH264(JNIEnv *env, jobject thiz, jbyteArray srcData,
-                                                jint length,
-                                                jlong time) {
+                                                  jint length,
+                                                  jlong time) {
     jbyte *bytes = env->GetByteArrayElements(srcData, NULL);
-    encoderH264(bytes, length, time);
+    EncoderH264(bytes, length, time);
     env->ReleaseByteArrayElements(srcData, bytes, 0);
 }
 
 static void
-Java_com_jokchen_x264_encoder_JniX264_CloseX264Encode(JNIEnv *env, jobject thiz) {
-    releaseX264Encode();
+Java_com_jokchen_x264_encoder_JniX264_closeX264Encode(JNIEnv *env, jobject thiz) {
+    ReleaseX264Encode();
 }
 
 //************************************************************************************************************************************/
@@ -108,7 +109,7 @@ Java_com_jokchen_x264_encoder_JniX264_CloseX264Encode(JNIEnv *env, jobject thiz)
 static JNINativeMethod gMethods[] = {{"initX264Encode",  "()V",     (void *) Java_com_jokchen_x264_encoder_JniX264_initX264Encode},
                                      {"setParameter",    "(IIII)V", (void *) Java_com_jokchen_x264_encoder_JniX264_setParameter},
                                      {"encoderH264",     "([BIJ)V", (void *) Java_com_jokchen_x264_encoder_JniX264_encoderH264},
-                                     {"CloseX264Encode", "()V",     (void *) Java_com_jokchen_x264_encoder_JniX264_CloseX264Encode}};
+                                     {"closeX264Encode", "()V",     (void *) Java_com_jokchen_x264_encoder_JniX264_closeX264Encode}};
 
 
 int register_Native_Methods(JNIEnv *env) {

@@ -22,7 +22,7 @@ public class JniX264 {
 
     public native void encoderH264(byte[] srcData, int length, long time);
 
-    public native void CloseX264Encode();
+    public native void closeX264Encode();
 
     private void H264DataCallBackFunc(byte[] buffer, int length) {
         mListener.onEncode(buffer, length);

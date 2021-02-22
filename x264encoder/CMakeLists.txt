@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 3.4.1)
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
-aux_source_directory(${CMAKE_SOURCE_DIR}/src/main/cpp SRC)
+aux_source_directory(${CMAKE_SOURCE_DIR}/src/main/cpp/src SRC)
 
 add_library( # Sets the name of the library.
         x264-lib
@@ -20,7 +20,6 @@ add_library( # Sets the name of the library.
         ${SRC})
 
 # add dir
-target_include_directories(x264-lib PRIVATE ${CMAKE_SOURCE_DIR}/src/main/cpp/x264)
 target_include_directories(x264-lib PRIVATE ${CMAKE_SOURCE_DIR}/src/main/cpp/include)
 
 # Searches for a specified prebuilt library and stores the path as a

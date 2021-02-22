@@ -8,12 +8,12 @@
 
 #ifdef __ANDROID__
 #include <android/log.h>
-#define LOG_TAG "ehSDK"
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__) // ¶¨ÒåLOGDÀàÐÍ
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__) // ¶¨ÒåLOGIÀàÐÍ
-#define LOGW(...) __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__) // ¶¨ÒåLOGWÀàÐÍ
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__) // ¶¨ÒåLOGEÀàÐÍ
-#define LOGF(...) __android_log_print(ANDROID_LOG_FATAL,LOG_TAG,__VA_ARGS__) // ¶¨ÒåLOGFÀàÐÍ
+#define LOG_TAG "jokchen"
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__) // ï¿½ï¿½ï¿½ï¿½LOGDï¿½ï¿½ï¿½ï¿½
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__) // ï¿½ï¿½ï¿½ï¿½LOGIï¿½ï¿½ï¿½ï¿½
+#define LOGW(...) __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__) // ï¿½ï¿½ï¿½ï¿½LOGWï¿½ï¿½ï¿½ï¿½
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__) // ï¿½ï¿½ï¿½ï¿½LOGEï¿½ï¿½ï¿½ï¿½
+#define LOGF(...) __android_log_print(ANDROID_LOG_FATAL,LOG_TAG,__VA_ARGS__) // ï¿½ï¿½ï¿½ï¿½LOGFï¿½ï¿½ï¿½ï¿½
 #else
 #define LOGD(...) //
 #define LOGI(...) //

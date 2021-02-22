@@ -1,23 +1,24 @@
-#include "include/x264_encoder.h"
-#include "include/PUX264Encoder.h"
+#include "x264_manager.h"
 
-x264Encode *_x264Encoder;
+#include "x264_encoder.h"
+
+X264Encode *_x264Encoder;
 H264DataCallBack h264callbackFunc;
 
-void initX264Encode(H264DataCallBack h264callback) {
+void InitX264Encode(H264DataCallBack h264callback) {
     if (NULL != _x264Encoder) {
-        releaseX264Encode();
+        ReleaseX264Encode();
     }
-    _x264Encoder = new x264Encode();
+    _x264Encoder = new X264Encode();
     h264callbackFunc = h264callback;
-    LOGI("/**********************initX264Encode*************************/");
+    LOGI("/**********************InitX264Encode*************************/");
 }
 
-void setParameter(int width, int height, int fps, int bite) {
-    _x264Encoder->setParameter(width, height, fps, bite);
+void SetParameter(int width, int height, int fps, int bite) {
+    _x264Encoder->SetParameter(width, height, fps, bite);
 }
 
-void encoderH264(void *pdata, unsigned int datalen, long long time) {
+void EncoderH264(void *pdata, unsigned int datalen, long long time) {
     if (_x264Encoder == NULL) {
         LOGI("_x264Encoder is Null");
         return;
@@ -27,7 +28,7 @@ void encoderH264(void *pdata, unsigned int datalen, long long time) {
     int buflen = -1;
     int isKeyFrame;
     //LOGI("/**********************PostOriginalSlice************************%d",datalen);
-    _x264Encoder->startEncoder((uint8_t *) pdata, *&bufdata, *&buflen, *&isKeyFrame);
+    _x264Encoder->StartEncoder((uint8_t *) pdata, *&bufdata, *&buflen, *&isKeyFrame);
     if (buflen != -1) {
         if (NULL != h264callbackFunc) {
             h264callbackFunc(bufdata, buflen);
@@ -38,9 +39,9 @@ void encoderH264(void *pdata, unsigned int datalen, long long time) {
     }
 }
 
-void releaseX264Encode() {
+void ReleaseX264Encode() {
     if (_x264Encoder) {
-        _x264Encoder->releaseEncoder();
+        _x264Encoder->ReleaseEncoder();
         delete _x264Encoder;
         _x264Encoder = NULL;
     }
