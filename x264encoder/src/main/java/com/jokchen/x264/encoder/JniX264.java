@@ -1,5 +1,7 @@
 package com.jokchen.x264.encoder;
 
+import java.nio.ByteBuffer;
+
 /**
  * @author chenxiuning
  * @brief
@@ -21,6 +23,8 @@ public class JniX264 {
     public native void setParameter(int width, int height, int fps, int bite);
 
     public native void encoderH264(byte[] srcData, int length, long time);
+
+    public native void encoderH264(ByteBuffer yun420p, int length, long time);
 
     public native void closeX264Encode();
 

@@ -18,7 +18,12 @@ Java_com_jokchen_x264_encoder_JniX264_setParameter(JNIEnv *env, jobject thiz, ji
 
 static void JNICALL
 Java_com_jokchen_x264_encoder_JniX264_encoderH264(JNIEnv *env, jobject thiz, jbyteArray srcData,
-                                                  jint lenght, jlong time);
+                                                  jint length, jlong time);
+
+static void JNICALL
+Java_com_jokchen_x264_encoder_JniX264_encoderH264ByBuffer(JNIEnv *env, jobject thiz,
+                                                          jobject yuv420p,
+                                                          jint length, jlong time);
 
 static void JNICALL
 Java_com_jokchen_x264_encoder_JniX264_closeX264Encode(JNIEnv *env, jobject thiz);

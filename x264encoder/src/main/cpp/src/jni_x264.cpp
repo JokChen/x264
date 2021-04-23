@@ -98,6 +98,14 @@ Java_com_jokchen_x264_encoder_JniX264_encoderH264(JNIEnv *env, jobject thiz, jby
 }
 
 static void
+Java_com_jokchen_x264_encoder_JniX264_encoderH264ByBuffer(JNIEnv *env, jobject thiz,
+                                                          jobject yuv420p,
+                                                          jint length, jlong time) {
+    u_int8_t *yuv420p_buf = (u_int8_t *) env->GetDirectBufferAddress(yuv420p);
+    EncoderH264(yuv420p_buf, length, time);
+}
+
+static void
 Java_com_jokchen_x264_encoder_JniX264_closeX264Encode(JNIEnv *env, jobject thiz) {
     ReleaseX264Encode();
 }
@@ -106,10 +114,11 @@ Java_com_jokchen_x264_encoder_JniX264_closeX264Encode(JNIEnv *env, jobject thiz)
 //************************************************************JNI_LOAL****************************************************************/
 //************************************************************************************************************************************/
 
-static JNINativeMethod gMethods[] = {{"initX264Encode",  "()V",     (void *) Java_com_jokchen_x264_encoder_JniX264_initX264Encode},
-                                     {"setParameter",    "(IIII)V", (void *) Java_com_jokchen_x264_encoder_JniX264_setParameter},
-                                     {"encoderH264",     "([BIJ)V", (void *) Java_com_jokchen_x264_encoder_JniX264_encoderH264},
-                                     {"closeX264Encode", "()V",     (void *) Java_com_jokchen_x264_encoder_JniX264_closeX264Encode}};
+static JNINativeMethod gMethods[] = {{"initX264Encode",  "()V",                        (void *) Java_com_jokchen_x264_encoder_JniX264_initX264Encode},
+                                     {"setParameter",    "(IIII)V",                    (void *) Java_com_jokchen_x264_encoder_JniX264_setParameter},
+                                     {"encoderH264",     "([BIJ)V",                    (void *) Java_com_jokchen_x264_encoder_JniX264_encoderH264},
+                                     {"encoderH264",     "(Ljava/nio/ByteBuffer;IJ)V", (void *) Java_com_jokchen_x264_encoder_JniX264_encoderH264ByBuffer},
+                                     {"closeX264Encode", "()V",                        (void *) Java_com_jokchen_x264_encoder_JniX264_closeX264Encode}};
 
 
 int register_Native_Methods(JNIEnv *env) {
